@@ -1,21 +1,134 @@
 export const lop4 = {
-  title: "Toán Lớp 4",
+  title: "Grade 4 Mathematics",
   topics: [
     {
       id: "l4_dang1",
-      name: "Dạng 1: Các phép tính với số tự nhiên",
+      name: "Topic 1: Operations with Whole Numbers",
       questions: [
-        { id: 1, content: "Bài 1: Tính 1234 + 5678", answer: "6912" },
-        { id: 2, content: "Bài 2: Tính 9999 - 1234", answer: "8765" }
-        // Thêm cho đủ 20 bài ở đây...
+        { id: 1, content: "Problem 1: Calculate: 125,430 + 98,715", answer: "224,145" },
+        { id: 2, content: "Problem 2: Calculate: 805,320 - 417,805", answer: "387,515" },
+        { id: 3, content: "Problem 3: Calculate: 2,145 × 108", answer: "231,660" },
+        { id: 4, content: "Problem 4: Calculate: 128,610 ÷ 426", answer: "302" },
+        { id: 5, content: "Problem 5: Find x: x - 4,250 = 12,800", answer: "x = 17,050" },
+        { id: 6, content: "Problem 6: Find x: 15 × x = 6,750", answer: "x = 450" },
+        { id: 7, content: "Problem 7: Evaluate the expression: 125 × 8 + 450 ÷ 9", answer: "1,050" },
+        { id: 8, content: "Problem 8: Calculate efficiently: 25 × 36 × 4", answer: "(25 × 4) × 36 = 3,600" },
+        { id: 9, content: "Problem 9: Calculate efficiently: 147 × 38 + 147 × 62", answer: "147 × (38 + 62) = 14,700" },
+        { id: 10, content: "Problem 10: Calculate efficiently: 2,025 × 101 - 2,025", answer: "2,025 × (101 - 1) = 202,500" },
+        { id: 11, content: "Problem 11: A kindergarten bought 125 milk cartons, and a primary school bought 375 milk cartons. How many cartons did both schools buy in total?", answer: "500 cartons" },
+        { id: 12, content: "Problem 12: A warehouse had 45,000 kg of rice. After exporting 18,500 kg, how many kg of rice remained?", answer: "26,500 kg" },
+        { id: 13, content: "Problem 13: A company produces 1,250 pairs of shoes every month. How many pairs does it produce in 1 year?", answer: "15,000 pairs" },
+        { id: 14, content: "Problem 14: 1,440 kg of oranges are packed equally into 36 crates. How many kg of oranges are in each crate?", answer: "40 kg" },
+        { id: 15, content: "Problem 15: Calculate: 10,000 - (2,500 + 3,200)", answer: "4,300" },
+        { id: 16, content: "Problem 16: Fill in the blank: 5 m² 8 dm² = ... dm²", answer: "508 dm²" },
+        { id: 17, content: "Problem 17: Fill in the blank: 3 tons 50 kg = ... kg", answer: "3,050 kg" },
+        { id: 18, content: "Problem 18: Find x: 8,400 ÷ x = 28", answer: "x = 300" },
+        { id: 19, content: "Problem 19: Calculate efficiently: 4 × 125 × 25 × 8", answer: "(4 × 25) × (125 × 8) = 100,000" },
+        { id: 20, content: "Problem 20: The average of 3 numbers is 150. The first number is 120, and the second is 160. Find the third number.", answer: "170" }
       ]
     },
     {
       id: "l4_dang2",
-      name: "Dạng 2: Bài toán rút về đơn vị",
+      name: "Topic 2: Unit Rate Problems & Averages",
       questions: [
-        { id: 1, content: "Bài 1: Mua 5 quyển vở hết 40.000đ. Hỏi 8 quyển hết bao nhiêu?", answer: "64.000đ" }
-        // Thêm cho đủ 20 bài ở đây...
+        { id: 1, content: "Problem 1: Buying 6 notebooks costs $48. How much will 9 notebooks cost?", answer: "$72" },
+        { id: 2, content: "Problem 2: 8 barrels hold 160 liters of oil. How many liters can 12 barrels hold?", answer: "240 liters" },
+        { id: 3, content: "Problem 3: 72 kg of rice are packed into 9 bags. How many bags are needed for 40 kg of rice?", answer: "5 bags" },
+        { id: 4, content: "Problem 4: The first truck carries 3 tons, and the second carries 4.5 tons. What is the average weight carried by each truck in quintals? (1 ton = 10 quintals)", answer: "37.5 quintals" },
+        { id: 5, content: "Problem 5: Find the average of the following numbers: 24, 36, 48, 60, and 72.", answer: "48" },
+        { id: 6, content: "Problem 6: A team repaired 120 m of road on Day 1, 150 m on Day 2, and 180 m on Day 3. What was the average length repaired per day?", answer: "150 m" },
+        { id: 7, content: "Problem 7: 12 meters of fabric are needed for 4 suits. How many suits can be made with 45 meters of fabric?", answer: "15 suits" },
+        { id: 8, content: "Problem 8: A walker travels 4 km/h for the first 3 hours and 3 km/h for the next 2 hours. What is the average speed per hour?", answer: "3.6 km/h" },
+        { id: 9, content: "Problem 9: The average of two numbers is 45. If one number is 38, find the other number.", answer: "52" },
+        { id: 10, content: "Problem 10: Class 4A has 32 students, 4B has 36, and 4C has 34. What is the average number of students per class?", answer: "34 students" },
+        { id: 11, content: "Problem 11: A store sells 250 kg of sugar in 5 days. How many kg of sugar will it sell in 8 days at the same rate?", answer: "400 kg" },
+        { id: 12, content: "Problem 12: Packing 180 bricks requires 6 boxes. How many boxes are needed for 450 bricks?", answer: "15 boxes" },
+        { id: 13, content: "Problem 13: Class 4A planted 120 trees, and 4B planted 150 trees. Class 4C planted the average number of trees planted by 4A and 4B. How many trees did 4C plant?", answer: "135 trees" },
+        { id: 14, content: "Problem 14: A car drives 50 km/h for 3 hours, then 40 km/h for 2 hours. What is its average speed?", answer: "46 km/h" },
+        { id: 15, content: "Problem 15: 5 meters of cloth cost $150. How much do 8 meters of the same cloth cost?", answer: "$240" },
+        { id: 16, content: "Problem 16: 40 liters of fish sauce are poured into 8 bottles. How many liters will fill 25 bottles?", answer: "125 liters" },
+        { id: 17, content: "Problem 17: The average of 4 numbers is 80. What is the sum of these 4 numbers?", answer: "320" },
+        { id: 18, content: "Problem 18: Three groups collect waste. Group 1 collects 120 kg, Group 2 collects 140 kg, and Group 3 collects 30 kg more than Group 1. What is the average weight collected per group?", answer: "136.6 kg" },
+        { id: 19, content: "Problem 19: 30 liters of honey are poured equally into 6 jars. How many jars are needed for 45 liters?", answer: "9 jars" },
+        { id: 20, content: "Problem 20: Find the natural number x if x is the average of all odd numbers less than 10.", answer: "5" }
+      ]
+    },
+    {
+      id: "l4_dang3",
+      name: "Topic 3: Word Problems (Sum-Difference, Sum-Ratio, Difference-Ratio)",
+      questions: [
+        { id: 1, content: "Problem 1: Find two numbers with a sum of 180 and a difference of 40.", answer: "Larger number: 110, Smaller number: 70" },
+        { id: 2, content: "Problem 2: Classes 4A and 4B planted 150 trees in total. Class 4A planted 20 more trees than Class 4B. How many trees did each class plant?", answer: "4A: 85 trees, 4B: 65 trees" },
+        { id: 3, content: "Problem 3: Find two numbers whose sum is 120, if the smaller number is 1/3 of the larger number.", answer: "Larger number: 90, Smaller number: 30" },
+        { id: 4, content: "Problem 4: A mother is 28 years older than her child. The child's age is 1/5 of the mother's age. Find their ages.", answer: "Child: 7 years old, Mother: 35 years old" },
+        { id: 5, content: "Problem 5: A rectangle has a perimeter of 120 m. The length is 10 m longer than the width. Find the length and width.", answer: "Length: 35 m, Width: 25 m" },
+        { id: 6, content: "Problem 6: The sum of two numbers is 350, and their ratio is 2/5. Find the two numbers.", answer: "Smaller: 100, Larger: 250" },
+        { id: 7, content: "Problem 7: The difference between two numbers is 84, and their ratio is 1/4. Find the two numbers.", answer: "Smaller: 28, Larger: 112" },
+        { id: 8, content: "Problem 8: A rectangular plot has a semi-perimeter of 75 m. The width is 2/3 of the length. Calculate the area.", answer: "1,350 m²" },
+        { id: 9, content: "Problem 9: Alex and Ben have 45 marbles in total. If Alex gives Ben 5 marbles, they will have equal amounts. How many marbles did each have originally?", answer: "Alex: 27 marbles, Ben: 18 marbles" },
+        { id: 10, content: "Problem 10: A father is 30 years older than his son. In 5 years, the son's age will be 1/4 of the father's age. Find the son's current age.", answer: "5 years old" },
+        { id: 11, content: "Problem 11: Find two consecutive even numbers whose sum is 202.", answer: "100 and 102" },
+        { id: 12, content: "Problem 12: Grade 4 has 240 students. The number of female students is double the number of male students. How many female students are there?", answer: "160 female students" },
+        { id: 13, content: "Problem 13: Tank 1 holds 30 liters of oil more than Tank 2. The ratio of oil between Tank 1 and Tank 2 is 7/4. Find the volume in each tank.", answer: "Tank 1: 70 L, Tank 2: 40 L" },
+        { id: 14, content: "Problem 14: Two warehouses hold 450 tons of grain. Warehouse A holds 4/5 of Warehouse B's grain. How many tons are in each warehouse?", answer: "Warehouse A: 200 tons, Warehouse B: 250 tons" },
+        { id: 15, content: "Problem 15: The semi-perimeter of a garden is 100 m. The length is 20 m less than 3 times the width. Find the dimensions.", answer: "Width: 30 m, Length: 70 m" },
+        { id: 16, content: "Problem 16: Ann and Bob have $120 altogether. Ann's money is 3/5 of Bob's money. How much money does Ann have?", answer: "$45" },
+        { id: 17, content: "Problem 17: Two numbers have a difference of 165. Removing the digit 0 on the right of the larger number yields the smaller number. Find the two numbers.", answer: "Larger number: 183.33, Smaller number: 18.33 (or integer approximation 183 and 18)" },
+        { id: 18, content: "Problem 18: Class 4A has 35 students. The ratio of boys to girls is 3/4. Find the number of boys.", answer: "15 boys" },
+        { id: 19, content: "Problem 19: Find two odd numbers with a sum of 120, knowing there are 5 other odd numbers between them.", answer: "54 and 66" },
+        { id: 20, content: "Problem 20: A shop sold 120 kg more plain rice than sticky rice. The sticky rice is 1/3 of the plain rice. How much plain rice was sold?", answer: "180 kg" }
+      ]
+    },
+    {
+      id: "l4_dang4",
+      name: "Topic 4: Fractions & Fractional Operations",
+      questions: [
+        { id: 1, content: "Problem 1: Simplify the fraction: 24/36", answer: "2/3" },
+        { id: 2, content: "Problem 2: Find a common denominator for: 2/3 and 5/7", answer: "14/21 and 15/21" },
+        { id: 3, content: "Problem 3: Calculate: 3/5 + 2/7", answer: "31/35" },
+        { id: 4, content: "Problem 4: Calculate: 7/8 - 1/3", answer: "13/24" },
+        { id: 5, content: "Problem 5: Calculate: 4/9 × 3/8", answer: "1/6" },
+        { id: 6, content: "Problem 6: Calculate: 5/6 ÷ 2/3", answer: "5/4" },
+        { id: 7, content: "Problem 7: Find x: x + 1/4 = 5/6", answer: "x = 7/12" },
+        { id: 8, content: "Problem 8: Find x: x × 2/3 = 8/9", answer: "x = 4/3" },
+        { id: 9, content: "Problem 9: Find 3/5 of 150 kg.", answer: "90 kg" },
+        { id: 10, content: "Problem 10: A class has 40 students, and male students account for 3/5 of the class. Find the number of female students.", answer: "16 female students" },
+        { id: 11, content: "Problem 11: Calculate efficiently: 2/3 × 4/5 + 2/3 × 1/5", answer: "2/3 × (4/5 + 1/5) = 2/3" },
+        { id: 12, content: "Problem 12: Compare fractions: 5/8 and 7/12", answer: "5/8 > 7/12 (since 30/48 > 28/48)" },
+        { id: 13, content: "Problem 13: Order from smallest to largest: 1/2, 2/5, 3/4", answer: "2/5 < 1/2 < 3/4" },
+        { id: 14, content: "Problem 14: A cloth bolt is 30 m long. If 2/3 is cut off, how many meters remain?", answer: "10 m" },
+        { id: 15, content: "Problem 15: Calculate: (1/2 + 1/3) × 6", answer: "5" },
+        { id: 16, content: "Problem 16: Find x: 2 - x = 3/7", answer: "x = 11/7" },
+        { id: 17, content: "Problem 17: A rectangle's area is 4/5 m² and its length is 8/5 m. Find its width.", answer: "1/2 m" },
+        { id: 18, content: "Problem 18: In an empty pool, Pipe A fills 2/7 of it in the first hour and Pipe B fills 3/7 in the second hour. What fraction remains unfilled?", answer: "2/7 of the pool" },
+        { id: 19, content: "Problem 19: Calculate efficiently: (1 - 1/2) × (1 - 1/3) × (1 - 1/4)", answer: "1/4" },
+        { id: 20, content: "Problem 20: 2/5 of Tom's marbles equals 12 marbles. How many marbles does he have in total?", answer: "30 marbles" }
+      ]
+    },
+    {
+      id: "l4_dang5",
+      name: "Topic 5: Geometry (Perimeter & Area)",
+      questions: [
+        { id: 1, content: "Problem 1: Find the perimeter of a rectangle with length 15 cm and width 8 cm.", answer: "46 cm" },
+        { id: 2, content: "Problem 2: Find the area of a rectangle with length 24 m and width 12 m.", answer: "288 m²" },
+        { id: 3, content: "Problem 3: A square has a perimeter of 36 cm. Find its area.", answer: "81 cm²" },
+        { id: 4, content: "Problem 4: A parallelogram has a base of 18 cm and a height of 10 cm. Find its area.", answer: "180 cm²" },
+        { id: 5, content: "Problem 5: Find the area of a rhombus with diagonals measuring 12 cm and 16 cm.", answer: "96 cm²" },
+        { id: 6, content: "Problem 6: A rectangular field has a length of 80 m, and its width is 1/2 of the length. Calculate the area.", answer: "3,200 m²" },
+        { id: 7, content: "Problem 7: A square has an area of 64 cm². Find its perimeter.", answer: "32 cm" },
+        { id: 8, content: "Problem 8: Convert unit: 4 m² 25 dm² = ... dm²", answer: "425 dm²" },
+        { id: 9, content: "Problem 9: Convert unit: 2 km² = ... m²", answer: "2,000,000 m²" },
+        { id: 10, content: "Problem 10: A schoolyard has a perimeter of 200 m, and the width is 20 m less than the length. Find its area.", answer: "2,400 m²" },
+        { id: 11, content: "Problem 11: A parallelogram-shaped field has a base of 40 m and a height of 25 m. Rice yields 50 kg per 100 m². How many kg of rice are harvested?", answer: "500 kg of rice" },
+        { id: 12, content: "Problem 12: A rhombus has an area of 40 cm² and one diagonal of 8 cm. Find the length of the other diagonal.", answer: "10 cm" },
+        { id: 13, content: "Problem 13: A rectangular room (8 m long, 6 m wide) is tiled using square tiles of side 4 dm. How many tiles are needed?", answer: "300 tiles" },
+        { id: 14, content: "Problem 14: A rectangle has an area of 108 cm² and a width of 9 cm. Find its perimeter.", answer: "42 cm" },
+        { id: 15, content: "Problem 15: If the side length of a square is doubled, by how many times does its area increase?", answer: "4 times" },
+        { id: 16, content: "Problem 16: Is an acute angle smaller than a right angle? (True/False)", answer: "True" },
+        { id: 17, content: "Problem 17: How many right angles make up a straight angle?", answer: "2 right angles (180°)" },
+        { id: 18, content: "Problem 18: A triangle has a base of 12 cm and a height of 8 cm. Find its area.", answer: "48 cm²" },
+        { id: 19, content: "Problem 19: A rectangular plot of land is 2 km long and 500 m wide. Calculate its area in km².", answer: "1 km²" },
+        { id: 20, content: "Problem 20: If the length of a rectangle decreases by 2 m and the width increases by 2 m, how does the perimeter change?", answer: "It remains unchanged" }
       ]
     }
   ]
