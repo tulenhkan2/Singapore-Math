@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Singapore Math Academy | Grades 5 - 7</title>
+  <!-- Tailwind CSS for styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- MathJax for rendering math equations -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="mathjax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+  <!-- Header -->
+  <header class="bg-indigo-700 text-white shadow-lg">
+    <div class="max-w-7xl mx-mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center">
+      <div>
+        <h1 class="text-3xl font-bold tracking-tight">Singapore Math Portal</h1>
+        <p class="text-indigo-200 text-sm mt-1">Mastering Model Method & Problem Solving (Grades 5–7)</p>
+      </div>
+      <div class="mt-4 md:mt-0 flex space-x-2">
+        <button onclick="filterGrade('all')" class="grade-btn px-4 py-2 rounded-lg bg-indigo-800 hover:bg-indigo-600 text-sm font-semibold transition">All Grades</button>
+        <button onclick="filterGrade('G5')" class="grade-btn px-4 py-2 rounded-lg bg-indigo-800 hover:bg-indigo-600 text-sm font-semibold transition">Grade 5</button>
+        <button onclick="filterGrade('G6')" class="grade-btn px-4 py-2 rounded-lg bg-indigo-800 hover:bg-indigo-600 text-sm font-semibold transition">Grade 6</button>
+        <button onclick="filterGrade('G7')" class="grade-btn px-4 py-2 rounded-lg bg-indigo-800 hover:bg-indigo-600 text-sm font-semibold transition">Grade 7</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 lg:grid-cols-4 gap-8">
+    
+    <!-- Sidebar: Topic Navigator -->
+    <aside class="lg:col-span-1 bg-white p-5 rounded-2xl shadow-sm border border-slate-200 h-fit">
+      <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Problem Types</h2>
+      <nav id="topic-list" class="space-y-2">
+        <!-- Topics will be dynamically injected here -->
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="lg:col-span-3 space-y-6">
+      
+      <!-- Topic Banner -->
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+        <div class="flex items-center space-x-3">
+          <span id="topic-grade-badge" class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-bold rounded-full">Grade 5</span>
+          <h2 id="topic-title" class="text-2xl font-bold text-slate-900">Topic Title</h2>
+        </div>
+        <p id="topic-desc" class="mt-2 text-slate-600 text-sm leading-relaxed"></p>
+      </div>
+
+      <!-- Problem Selector Tabs -->
+      <div class="flex items-center space-x-2 overflow-x-auto pb-2" id="problem-tabs">
+        <!-- Tabs 1-10 injected here -->
+      </div>
+
+      <!-- Problem Card -->
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+        <div>
+          <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Problem Statement</span>
+          <div id="problem-text" class="mt-2 text-lg font-medium text-slate-800 leading-snug"></div>
+        </div>
+
+        <!-- Canvas Area for Interactive Model Method -->
+        <div>
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">Visual Model Method (Interactive Diagram)</span>
+          <div class="bg-slate-100 p-4 rounded-xl flex justify-center items-center border border-slate-200">
+            <canvas id="modelCanvas" width="650" height="220" class="max-w-full bg-white rounded-lg shadow-inner"></canvas>
+          </div>
+        </div>
+
+        <!-- Interactive Action -->
+        <div class="pt-2 border-t border-slate-100 flex justify-between items-center">
+          <button id="toggle-solution-btn" onclick="toggleSolution()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl text-sm transition shadow-sm">
+            Show Worked Solution
+          </button>
+        </div>
+
+        <!-- Solution Panel -->
+        <div id="solution-panel" class="hidden bg-indigo-50/60 p-6 rounded-xl border border-indigo-100 space-y-4">
+          <h3 class="font-bold text-indigo-900 text-base">Step-by-Step Solution</h3>
+          <div id="solution-text" class="text-slate-700 space-y-3 text-sm leading-relaxed"></div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- JavaScript App Logic -->
+  <script>
+    // --- DATABASE STRUCTURE ---
+    const mathData = [
+      {
+        id: "g5-frac-unchanged",
+        grade: "G5",
+        title: "Fractions: Unchanged Quantity Concept",
+        desc: "Problems where one quantity remains constant while another changes, requiring you to find equivalent units using the Model Method.",
+        problems: [
+          {
+            id: 1,
+            question: "A box contained green and red balls. At first, $\\frac{3}{5}$ of the balls were green. After selling 48 green balls, $\\frac{1}{3}$ of the remaining balls were green. How many balls were in the box originally?",
+            canvasData: {
+              type: "comparison",
+              labels: ["Green (Before)", "Red (Unchanged)"],
+              units: [3, 2],
+              changedUnit: 1, // After
+              colors: ["#10B981", "#EF4444"]
+            },
+            solution: [
+              "<b>Step 1: Identify the Unchanged Quantity</b><br>The number of red balls remains unchanged before and after.",
+              "<b>Step 2: Express ratios in terms of units</b><br>Before: Green : Red = $3 : 2$<br>After: Green : Red = $1 : 2$",
+              "<b>Step 3: Compare green units before and after</b><br>Green units dropped from 3 units to 1 unit.<br>Decrease = $3\\text{ units} - 1\\text{ unit} = 2\\text{ units}$.",
+              "<b>Step 4: Calculate total balls</b><br>2 units = 48 green balls<br>1 unit = $48 \\div 2 = 24$<br>Total original balls = 5 units = $24 \\times 5 = 120$ balls."
+            ]
+          },
+          {
+            id: 2,
+            question: "John had $\\frac{2}{3}$ as many stamps as Peter. After Peter gave away 40 stamps, Peter had $\\frac{1}{2}$ as many stamps as John. How many stamps did John have?",
+            canvasData: {
+              type: "comparison",
+              labels: ["John (Unchanged)", "Peter (Before)"],
+              units: [2, 3],
+              changedUnit: 1,
+              colors: ["#3B82F6", "#F59E0B"]
+            },
+            solution: [
+              "<b>Step 1: Identify the Unchanged Quantity</b><br>John's stamps remain unchanged.",
+              "<b>Step 2: Equalize John's units</b><br>Ratio Before (John : Peter) = $2 : 3$<br>Ratio After (Peter : John) = $1 : 2$, which means (John : Peter) = $2 : 1$.",
+              "<b>Step 3: Find the decrease in Peter's stamps</b><br>Peter's units dropped from 3 units to 1 unit.<br>Decrease = $3 - 1 = 2\\text{ units}$.",
+              "<b>Step 4: Solve for John's stamps</b><br>2 units = 40 stamps $\\rightarrow$ 1 unit = 20 stamps.<br>John's stamps = 2 units = $20 \\times 2 = 40$ stamps."
+            ]
+          }
+          // Note: Expandable to 10 problems per topic
+        ]
+      },
+      {
+        id: "g6-ratio-transfer",
+        grade: "G6",
+        title: "Ratio: Internal Transfer Concept",
+        desc: "Problems where items are transferred between two groups. The individual amounts change, but the total sum remains constant.",
+        problems: [
+          {
+            id: 1,
+            question: "The ratio of Alan's money to Ben's money was $7 : 3$. After Alan gave $45 to Ben, they both had an equal amount of money. How much money did they have altogether?",
+            canvasData: {
+              type: "comparison",
+              labels: ["Alan (Before)", "Ben (Before)"],
+              units: [7, 3],
+              colors: ["#8B5CF6", "#EC4899"]
+            },
+            solution: [
+              "<b>Step 1: Understand Total Constant</b><br>Total units before = $7 + 3 = 10\\text{ units}$. Total units after = $5 + 5 = 10\\text{ units}$ (since they become equal).",
+              "<b>Step 2: Track unit changes</b><br>Alan gave away $7 - 5 = 2\\text{ units}$.<br>Ben gained $5 - 3 = 2\\text{ units}$.",
+              "<b>Step 3: Solve for total amount</b><br>2 units = $45.<br>1 unit = $22.50.<br>Total money (10 units) = $22.50 \\times 10 = $225."
+            ]
+          }
+        ]
+      },
+      {
+        id: "g7-algebra-word",
+        grade: "G7",
+        title: "Algebraic Equations in Word Problems",
+        desc: "Transitioning from Singapore Model Method to linear equations with variables ($x, y$) for complex multi-step problems.",
+        problems: [
+          {
+            id: 1,
+            question: "A notebook costs $x$ dollars and a pen costs $(x - 2)$ dollars. Mrs. Lee bought 4 notebooks and 3 pens for a total of $36. Find the cost of a notebook.",
+            canvasData: {
+              type: "algebra",
+              labels: ["Notebooks (4x)", "Pens 3(x-2)"],
+              units: [4, 3],
+              colors: ["#06B6D4", "#10B981"]
+            },
+            solution: [
+              "<b>Step 1: Formulate the algebraic equation</b><br>Total Cost = $4(x) + 3(x - 2) = 36$",
+              "<b>Step 2: Expand and simplify</b><br>$4x + 3x - 6 = 36$<br>$7x - 6 = 36$",
+              "<b>Step 3: Solve for $x$</b><br>$7x = 42 \\implies x = 6$.<br>Each notebook costs $6."
+            ]
+          }
+        ]
+      }
+    ];
+
+    // --- STATE MANAGEMENT ---
+    let currentTopicIndex = 0;
+    let currentProblemIndex = 0;
+
+    // --- INITIALIZATION ---
+    window.onload = () => {
+      renderTopicList(mathData);
+      loadTopic(0);
+    };
+
+    // --- FILTER BY GRADE ---
+    function filterGrade(grade) {
+      const filtered = grade === 'all' ? mathData : mathData.filter(d => d.grade === grade);
+      renderTopicList(filtered);
+      if(filtered.length > 0) {
+        const originalIndex = mathData.findIndex(t => t.id === filtered[0].id);
+        loadTopic(originalIndex);
+      }
+    }
+
+    // --- RENDER SIDEBAR TOPICS ---
+    function renderTopicList(topics) {
+      const nav = document.getElementById('topic-list');
+      nav.innerHTML = topics.map((t) => {
+        const index = mathData.findIndex(item => item.id === t.id);
+        return `
+          <button onclick="loadTopic(${index})" class="w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium transition flex items-center justify-between ${index === currentTopicIndex ? 'bg-indigo-50 text-indigo-700 font-semibold' : 'text-slate-600 hover:bg-slate-100'}">
+            <span class="truncate">${t.title}</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-slate-200 text-slate-600 font-bold">${t.grade}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    // --- LOAD TOPIC DATA ---
+    function loadTopic(topicIndex) {
+      currentTopicIndex = topicIndex;
+      currentProblemIndex = 0;
+      const topic = mathData[topicIndex];
+
+      document.getElementById('topic-title').innerText = topic.title;
+      document.getElementById('topic-desc').innerText = topic.desc;
+      document.getElementById('topic-grade-badge').innerText = topic.grade;
+
+      renderTopicList(mathData);
+      renderProblemTabs(topic.problems);
+      loadProblem(0);
+    }
+
+    // --- RENDER PROBLEM TABS ---
+    function renderProblemTabs(problems) {
+      const tabs = document.getElementById('problem-tabs');
+      tabs.innerHTML = problems.map((p, idx) => `
+        <button onclick="loadProblem(${idx})" class="px-4 py-1.5 rounded-lg text-xs font-bold transition border ${idx === currentProblemIndex ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'}">
+          Problem ${idx + 1}
+        </button>
+      `).join('');
+    }
+
+    // --- LOAD SPECIFIC PROBLEM ---
+    function loadProblem(problemIdx) {
+      currentProblemIndex = problemIdx;
+      const problem = mathData[currentTopicIndex].problems[problemIdx];
+
+      // Update tabs UI
+      renderProblemTabs(mathData[currentTopicIndex].problems);
+
+      // Set problem text
+      document.getElementById('problem-text').innerHTML = problem.question;
+
+      // Set solution text
+      document.getElementById('solution-text').innerHTML = problem.solution.map(s => `<p>${s}</p>`).join('');
+      document.getElementById('solution-panel').classList.add('hidden');
+      document.getElementById('toggle-solution-btn').innerText = "Show Worked Solution";
+
+      // Render MathJax equations
+      if (window.MathJax) {
+        MathJax.typesetPromise();
+      }
+
+      // Draw Canvas Model
+      drawModelCanvas(problem.canvasData);
+    }
+
+    // --- TOGGLE SOLUTION ---
+    function toggleSolution() {
+      const panel = document.getElementById('solution-panel');
+      const btn = document.getElementById('toggle-solution-btn');
+      if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        btn.innerText = "Hide Worked Solution";
+      } else {
+        panel.classList.add('hidden');
+        btn.innerText = "Show Worked Solution";
+      }
+    }
+
+    // --- CANVAS MODEL DRAWING ENGINE ---
+    function drawModelCanvas(data) {
+      const canvas = document.getElementById('modelCanvas');
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (!data) return;
+
+      const startX = 140;
+      let startY = 40;
+      const barHeight = 35;
+      const unitWidth = 50;
+
+      data.labels.forEach((label, idx) => {
+        // Draw Label
+        ctx.font = "bold 13px sans-serif";
+        ctx.fillStyle = "#334155";
+        ctx.fillText(label, 15, startY + 22);
+
+        // Draw Units (Blocks)
+        const unitCount = data.units[idx];
+        for (let i = 0; i < unitCount; i++) {
+          ctx.fillStyle = data.colors[idx] || "#3B82F6";
+          ctx.fillRect(startX + (i * unitWidth), startY, unitWidth - 2, barHeight);
+
+          // Draw Unit Border
+          ctx.strokeStyle = "#1E293B";
+          ctx.lineWidth = 1;
+          ctx.strokeRect(startX + (i * unitWidth), startY, unitWidth - 2, barHeight);
+
+          // Label '1u'
+          ctx.fillStyle = "#FFFFFF";
+          ctx.font = "11px sans-serif";
+          ctx.fillText("1u", startX + (i * unitWidth) + 18, startY + 22);
+        }
+
+        startY += 70;
+      });
+    }
+  </script>
+</body>
+</html>
