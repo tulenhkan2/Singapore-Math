@@ -2,110 +2,133 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Luyện Tập Toán</title>
-<style>
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
-    color: #333;
-    padding: 20px;
-    max-width: 900px;
-    margin: 0 auto;
-  }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hệ Thống Bài Tập Toán</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
-  .topic-title {
-    color: #1a73e8;
-    margin-top: 25px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #1a73e8;
-    padding-bottom: 8px;
-  }
+    h1 {
+      color: #1a73e8;
+      text-align: center;
+      margin-bottom: 25px;
+    }
 
-  /* Khung thẻ chứa từng câu hỏi */
-  .exercise-card {
-    background: #ffffff;
-    border-radius: 8px;
-    padding: 18px 22px;
-    margin-bottom: 16px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-    border-left: 4px solid #1a73e8;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
+    .controls-container {
+      background: #ffffff;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      margin-bottom: 25px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
 
-  .exercise-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-  }
+    label {
+      font-weight: 600;
+    }
 
-  .question-text {
-    font-size: 1.05rem;
-    font-weight: 600;
-    line-height: 1.5;
-    color: #2c3e50;
-    margin-bottom: 12px;
-  }
+    select {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      outline: none;
+      font-size: 0.95rem;
+    }
 
-  /* Nút xem đáp án */
-  .btn-toggle-answer {
-    background-color: #e8f0fe;
-    color: #1a73e8;
-    border: 1px solid #1a73e8;
-    padding: 6px 14px;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: all 0.2s;
-  }
+    .topic-title {
+      color: #1a73e8;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #1a73e8;
+      padding-bottom: 8px;
+    }
 
-  .btn-toggle-answer:hover {
-    background-color: #1a73e8;
-    color: #fff;
-  }
+    /* Khung bài tập (Card) */
+    .exercise-card {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      border-left: 4px solid #1a73e8;
+    }
 
-  /* Khung hiển thị đáp án ẩn/hiện */
-  .answer-box {
-    display: none; /* Mặc định ẩn */
-    margin-top: 12px;
-    padding: 10px 15px;
-    background-color: #e6f4ea;
-    border-radius: 6px;
-    color: #137333;
-    font-weight: 600;
-    border-left: 3px solid #34a853;
-  }
+    .question-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.5;
+      color: #2c3e50;
+      margin-bottom: 12px;
+    }
 
-  .answer-box.show {
-    display: block; /* Hiện khi bấm nút */
-  }
-</style>
-  
+    /* Nút xem đáp án */
+    .btn-toggle-answer {
+      background-color: #e8f0fe;
+      color: #1a73e8;
+      border: 1px solid #1a73e8;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .btn-toggle-answer:hover {
+      background-color: #1a73e8;
+      color: #fff;
+    }
+
+    /* Khung đáp án */
+    .answer-box {
+      display: none;
+      margin-top: 12px;
+      padding: 10px 15px;
+      background-color: #e6f4ea;
+      border-radius: 6px;
+      color: #137333;
+      font-weight: 600;
+      border-left: 3px solid #34a853;
+    }
+
+    .answer-box.show {
+      display: block;
+    }
+  </style>
 </head>
 <body>
 
   <h1>Hệ Thống Bài Tập Toán</h1>
 
-  <!-- Thanh chọn Lớp và Dạng toán -->
-  <label for="gradeSelect">Chọn khối lớp:</label>
-  <select id="gradeSelect">
-    <option value="">-- Chọn Lớp --</option>
-    <option value="lop4">Lớp 4</option>
-    <option value="lop5">Lớp 5</option>
-    <option value="lop6">Lớp 6</option>
-    <option value="lop7">Lớp 7</option>
-    <option value="lop8">Lớp 8</option>
-  </select>
+  <div class="controls-container">
+    <label for="gradeSelect">Chọn khối lớp:</label>
+    <select id="gradeSelect">
+      <option value="">-- Chọn Lớp --</option>
+      <option value="lop4">Lớp 4</option>
+      <option value="lop5">Lớp 5</option>
+      <option value="lop6">Lớp 6</option>
+      <option value="lop7">Lớp 7</option>
+      <option value="lop8">Lớp 8</option>
+    </select>
 
-  <label for="topicSelect">Chọn dạng toán:</label>
-  <select id="topicSelect" disabled>
-    <option value="">-- Chọn Dạng Toán --</option>
-  </select>
+    <label for="topicSelect">Chọn dạng toán:</label>
+    <select id="topicSelect" disabled>
+      <option value="">-- Chọn Dạng Toán --</option>
+    </select>
+  </div>
 
-  <!-- Khu vực hiển thị danh sách 20 bài -->
-  <hr>
   <div id="exerciseList"></div>
 
-  <!-- Nhúng file app.js dưới dạng module -->
-  <script type="module" src="js/app.js"></script>
+  <!-- Thêm ?v=1.1 phía sau để ép trình duyệt xóa cache script cũ -->
+  <script type="module" src="./js/app.js?v=1.1"></script>
 </body>
 </html>
