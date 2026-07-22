@@ -27,27 +27,46 @@ gradeSelect.addEventListener('change', (e) => {
     topicSelect.disabled = true;
   }
 });
-
-// 2. Lắng nghe khi chọn Dạng Toán
+// Lắng nghe sự kiện chọn Dạng Toán
 topicSelect.addEventListener('change', (e) => {
   const selectedGrade = gradeSelect.value;
   const topicIndex = e.target.value;
+
   exerciseList.innerHTML = '';
 
-  if (topicIndex !== "") {
+  if (topicIndex !== '' && mathData[selectedGrade]) {
     const selectedTopic = mathData[selectedGrade].topics[topicIndex];
-    
-    // Tiêu đề dạng toán
-    const title = document.createElement('h3');
-    title.textContent = selectedTopic.name;
-    exerciseList.appendChild(title);
 
-    // Hiển thị danh sách câu hỏi
+    // Tiêu đề dạng toán
+    const topicHeading = document.createElement('h2');
+    topicHeading.className = 'topic-title';
+    topicHeading.textContent = selectedTopic.name;
+    exerciseList.appendChild(topicHeading);
+
+    // Duyệt qua từng câu hỏi trong topic
     selectedTopic.questions.forEach((q) => {
-      const item = document.createElement('div');
-      item.style.marginBottom = '10px';
-      item.innerHTML = `<strong>${q.content}</strong>`;
-      exerciseList.appendChild(item);
+      const card = document.createElement('div');
+      card.className = 'exercise-card';
+
+      card.innerHTML = `
+        <div class="question-text">${q.content}</div>
+        <button class="btn-toggle-answer">Show Answer</button>
+        <div class="answer-box">
+          <strong>Answer:</strong> ${q.answer}
+        </div>
+      `;
+
+      // Gắn sự kiện click Ẩn/Hiện đáp án cho nút bấm
+      const toggleBtn = card.querySelector('.btn-toggle-answer');
+      const answerBox = card.querySelector('.answer-box');
+
+      toggleBtn.addEventListener('click', () => {
+        const isShown = answerBox.classList.toggle('show');
+        toggleBtn.textContent = isShown ? 'Hide Answer' : 'Show Answer';
+      });
+
+      exerciseList.appendChild(card);
     });
   }
+});
 });
