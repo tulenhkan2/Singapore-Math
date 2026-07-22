@@ -47,13 +47,14 @@ topicSelect.addEventListener('change', (e) => {
       const card = document.createElement('div');
       card.className = 'exercise-card';
 
-      card.innerHTML = `
-        <div class="question-text">${q.content}</div>
-        <button class="btn-toggle-answer">Show Answer</button>
-        <div class="answer-box">
-          <strong>Answer:</strong> ${q.answer}
-        </div>
-      `;
+card.innerHTML = `
+  <div class="question-text">${q.content}</div>
+  <button class="btn-toggle-answer">Show Answer & Solution</button>
+  <div class="answer-box">
+    ${q.solution ? `<div style="margin-bottom:8px; white-space:pre-line;"><strong>Worked Solution:</strong><br>${q.solution}</div>` : ''}
+    <div style="color:#137333;"><strong>Final Answer:</strong> ${q.answer}</div>
+  </div>
+`;
 
       // Bắt sự kiện click Ẩn/Hiện đáp án
       const toggleBtn = card.querySelector('.btn-toggle-answer');
