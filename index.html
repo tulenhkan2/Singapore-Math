@@ -1,233 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Singapore Math Interactive Portal</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="mathjax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <title>Luyện Tập Toán</title>
 </head>
-<body class="bg-slate-50 font-sans text-slate-800">
+<body>
 
-  <!-- Header -->
-  <header class="bg-indigo-700 text-white shadow-lg">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-      <div>
-        <h1 class="text-2xl font-bold">Singapore Math Hub</h1>
-        <p class="text-indigo-200 text-xs">Interactive Practice & Model Method (Grades 5–7)</p>
-      </div>
-      <div id="score-board" class="bg-indigo-800 px-4 py-2 rounded-xl text-sm font-semibold border border-indigo-500">
-        Score: <span id="score" class="text-yellow-300 font-bold">0</span> / <span id="total-attempted">0</span>
-      </div>
-    </div>
-  </header>
+  <h1>Hệ Thống Bài Tập Toán</h1>
 
-  <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 lg:grid-cols-4 gap-8">
-    
-    <!-- Sidebar -->
-    <aside class="lg:col-span-1 bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-      <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Topics</h2>
-      <nav id="topic-list" class="space-y-2"></nav>
-    </aside>
+  <!-- Thanh chọn Lớp và Dạng toán -->
+  <label for="gradeSelect">Chọn khối lớp:</label>
+  <select id="gradeSelect">
+    <option value="">-- Chọn Lớp --</option>
+    <option value="lop4">Lớp 4</option>
+    <option value="lop5">Lớp 5</option>
+    <option value="lop6">Lớp 6</option>
+    <option value="lop7">Lớp 7</option>
+    <option value="lop8">Lớp 8</option>
+  </select>
 
-    <!-- Main Question Area -->
-    <main class="lg:col-span-3 space-y-6">
-      
-      <!-- Topic Header -->
-      <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex justify-between items-center">
-        <div>
-          <span id="topic-grade" class="px-2.5 py-0.5 bg-indigo-100 text-indigo-700 text-xs font-bold rounded-full">G5</span>
-          <h2 id="topic-title" class="text-xl font-bold text-slate-900 inline ml-2">Topic</h2>
-        </div>
-        <div id="problem-tabs" class="flex space-x-1 overflow-x-auto max-w-md py-1"></div>
-      </div>
+  <label for="topicSelect">Chọn dạng toán:</label>
+  <select id="topicSelect" disabled>
+    <option value="">-- Chọn Dạng Toán --</option>
+  </select>
 
-      <!-- Question Card -->
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-6">
-        <div>
-          <div class="flex justify-between items-center mb-2">
-            <span class="text-xs font-bold text-indigo-600 uppercase">Question <span id="q-num">1</span></span>
-          </div>
-          <div id="problem-text" class="text-lg font-medium text-slate-800"></div>
-        </div>
+  <!-- Khu vực hiển thị danh sách 20 bài -->
+  <hr>
+  <div id="exerciseList"></div>
 
-        <!-- Interactive Multiple Choice Options -->
-        <div class="space-y-3">
-          <span class="text-xs font-bold text-slate-400 uppercase">Select Your Answer:</span>
-          <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
-        </div>
-
-        <!-- Feedback Alert -->
-        <div id="feedback" class="hidden p-4 rounded-xl text-sm font-semibold"></div>
-
-        <!-- Model Method & Worked Solution (Hidden until answered or toggled) -->
-        <div id="solution-section" class="hidden space-y-6 pt-4 border-t border-slate-100">
-          <div>
-            <span class="text-xs font-bold text-slate-400 uppercase block mb-2">Model Method Visual</span>
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-center">
-              <canvas id="modelCanvas" width="600" height="180" class="bg-white rounded-lg border border-slate-200 shadow-sm"></canvas>
-            </div>
-          </div>
-
-          <div class="bg-indigo-50/70 p-5 rounded-xl border border-indigo-100 space-y-3">
-            <h3 class="font-bold text-indigo-900 text-sm">Step-by-Step Solution</h3>
-            <div id="solution-text" class="text-slate-700 text-sm space-y-2"></div>
-          </div>
-        </div>
-
-      </div>
-    </main>
-  </div>
-
-  <script>
-    // DATA BANK (Easy to expand to 20+ questions per topic)
-    const mathData = [
-      {
-        id: "g5-unchanged",
-        grade: "G5",
-        title: "Fractions: Unchanged Quantity",
-        problems: [
-          {
-            id: 1,
-            question: "A box contained green and red balls. At first, $\\frac{3}{5}$ of the balls were green. After selling 48 green balls, $\\frac{1}{3}$ of the remaining balls were green. How many balls were in the box originally?",
-            options: ["90 balls", "120 balls", "144 balls", "160 balls"],
-            correctAnswer: 1, // Index 1 = "120 balls"
-            canvasData: { labels: ["Green (Before)", "Red (Unchanged)"], units: [3, 2], colors: ["#10B981", "#EF4444"] },
-            solution: [
-              "1. Red balls remain constant: Before (Green:Red = 3:2), After (Green:Red = 1:2).",
-              "2. Green balls decrease by $3 - 1 = 2\\text{ units} = 48\\text{ balls}$.",
-              "3. $1\\text{ unit} = 24\\text{ balls}$. Total original = $5\\text{ units} = 24 \\times 5 = 120\\text{ balls}$."
-            ]
-          },
-          {
-            id: 2,
-            question: "John had $\\frac{2}{3}$ as many stamps as Peter. After Peter gave away 40 stamps, Peter had $\\frac{1}{2}$ as many stamps as John. How many stamps did John have?",
-            options: ["30 stamps", "40 stamps", "60 stamps", "80 stamps"],
-            correctAnswer: 1, // Index 1 = "40 stamps"
-            canvasData: { labels: ["John (Unchanged)", "Peter (Before)"], units: [2, 3], colors: ["#3B82F6", "#F59E0B"] },
-            solution: [
-              "1. John's stamps remain constant. Ratio Before (John:Peter = 2:3), After (John:Peter = 2:1).",
-              "2. Peter dropped from 3 units to 1 unit $\\implies 2\\text{ units} = 40\\text{ stamps}$.",
-              "3. $1\\text{ unit} = 20\\text{ stamps}$. John has $2\\text{ units} = 40\\text{ stamps}$."
-            ]
-          }
-        ]
-      }
-    ];
-
-    let currentTopicIdx = 0;
-    let currentProblemIdx = 0;
-    let score = 0;
-    let attempted = 0;
-    let answered = false;
-
-    window.onload = () => {
-      renderTopics();
-      loadTopic(0);
-    };
-
-    function renderTopics() {
-      const nav = document.getElementById('topic-list');
-      nav.innerHTML = mathData.map((t, idx) => `
-        <button onclick="loadTopic(${idx})" class="w-full text-left px-3 py-2 rounded-xl text-sm font-medium transition flex justify-between ${idx === currentTopicIdx ? 'bg-indigo-50 text-indigo-700 font-bold' : 'text-slate-600 hover:bg-slate-100'}">
-          <span class="truncate">${t.title}</span>
-          <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-200 font-bold">${t.grade}</span>
-        </button>
-      `).join('');
-    }
-
-    function loadTopic(idx) {
-      currentTopicIdx = idx;
-      currentProblemIdx = 0;
-      document.getElementById('topic-title').innerText = mathData[idx].title;
-      document.getElementById('topic-grade').innerText = mathData[idx].grade;
-      renderTopics();
-      loadProblem(0);
-    }
-
-    function loadProblem(pIdx) {
-      currentProblemIdx = pIdx;
-      answered = false;
-      const p = mathData[currentTopicIdx].problems[pIdx];
-
-      document.getElementById('q-num').innerText = pIdx + 1;
-      document.getElementById('problem-text').innerHTML = p.question;
-      document.getElementById('feedback').classList.add('hidden');
-      document.getElementById('solution-section').classList.add('hidden');
-
-      // Render Tabs
-      const tabs = document.getElementById('problem-tabs');
-      tabs.innerHTML = mathData[currentTopicIdx].problems.map((_, i) => `
-        <button onclick="loadProblem(${i})" class="px-2.5 py-1 rounded text-xs font-bold ${i === pIdx ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
-          Q${i + 1}
-        </button>
-      `).join('');
-
-      // Render Multiple Choice Buttons
-      const optsContainer = document.getElementById('options-container');
-      optsContainer.innerHTML = p.options.map((opt, oIdx) => `
-        <button onclick="checkAnswer(${oIdx})" class="opt-btn w-full text-left p-3.5 rounded-xl border border-slate-200 hover:border-indigo-500 hover:bg-indigo-50/50 transition text-sm font-medium flex items-center space-x-3">
-          <span class="w-6 h-6 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-xs font-bold">${String.fromCharCode(65 + oIdx)}</span>
-          <span>${opt}</span>
-        </button>
-      `).join('');
-
-      if (window.MathJax) MathJax.typesetPromise();
-    }
-
-    function checkAnswer(selectedIdx) {
-      if (answered) return;
-      answered = true;
-      attempted++;
-
-      const p = mathData[currentTopicIdx].problems[currentProblemIdx];
-      const isCorrect = selectedIdx === p.correctAnswer;
-      const feedback = document.getElementById('feedback');
-
-      if (isCorrect) {
-        score++;
-        feedback.className = "p-4 rounded-xl text-sm font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200";
-        feedback.innerHTML = "🎉 <b>Correct!</b> Excellent problem-solving skills.";
-      } else {
-        feedback.className = "p-4 rounded-xl text-sm font-semibold bg-rose-50 text-rose-800 border border-rose-200";
-        feedback.innerHTML = `❌ <b>Incorrect.</b> The correct answer was: <b>${p.options[p.correctAnswer]}</b>`;
-      }
-
-      feedback.classList.remove('hidden');
-      document.getElementById('solution-section').classList.remove('hidden');
-      document.getElementById('score').innerText = score;
-      document.getElementById('total-attempted').innerText = attempted;
-
-      // Render Solution & Canvas Diagram
-      document.getElementById('solution-text').innerHTML = p.solution.map(s => `<p>${s}</p>`).join('');
-      drawCanvas(p.canvasData);
-      if (window.MathJax) MathJax.typesetPromise();
-    }
-
-    function drawCanvas(data) {
-      const canvas = document.getElementById('modelCanvas');
-      const ctx = canvas.getContext('2d');
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      if (!data) return;
-
-      let y = 30;
-      data.labels.forEach((label, i) => {
-        ctx.font = "bold 12px sans-serif";
-        ctx.fillStyle = "#475569";
-        ctx.fillText(label, 10, y + 20);
-
-        for (let u = 0; u < data.units[i]; u++) {
-          ctx.fillStyle = data.colors[i] || "#3B82F6";
-          ctx.fillRect(150 + u * 45, y, 43, 30);
-          ctx.strokeStyle = "#1E293B";
-          ctx.strokeRect(150 + u * 45, y, 43, 30);
-          ctx.fillStyle = "#FFF";
-          ctx.fillText("1u", 150 + u * 45 + 15, y + 18);
-        }
-        y += 65;
-      });
-    }
-  </script>
+  <!-- Nhúng file app.js dưới dạng module -->
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
