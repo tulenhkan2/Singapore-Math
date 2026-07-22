@@ -3,6 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <title>Luyện Tập Toán</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .topic-title {
+    color: #1a73e8;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #1a73e8;
+    padding-bottom: 8px;
+  }
+
+  /* Khung thẻ chứa từng câu hỏi */
+  .exercise-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    border-left: 4px solid #1a73e8;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .exercise-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  }
+
+  .question-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #2c3e50;
+    margin-bottom: 12px;
+  }
+
+  /* Nút xem đáp án */
+  .btn-toggle-answer {
+    background-color: #e8f0fe;
+    color: #1a73e8;
+    border: 1px solid #1a73e8;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+
+  .btn-toggle-answer:hover {
+    background-color: #1a73e8;
+    color: #fff;
+  }
+
+  /* Khung hiển thị đáp án ẩn/hiện */
+  .answer-box {
+    display: none; /* Mặc định ẩn */
+    margin-top: 12px;
+    padding: 10px 15px;
+    background-color: #e6f4ea;
+    border-radius: 6px;
+    color: #137333;
+    font-weight: 600;
+    border-left: 3px solid #34a853;
+  }
+
+  .answer-box.show {
+    display: block; /* Hiện khi bấm nút */
+  }
+</style>
+  
 </head>
 <body>
 
