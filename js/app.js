@@ -7,8 +7,7 @@ const exerciseList = document.getElementById('exerciseList');
 // 1. Lắng nghe khi chọn Khối Lớp
 gradeSelect.addEventListener('change', (e) => {
   const selectedGrade = e.target.value;
-  
-  // Reset lại dropdown Dạng toán và danh sách bài
+
   topicSelect.innerHTML = '<option value="">-- Chọn Dạng Toán --</option>';
   exerciseList.innerHTML = '';
 
@@ -16,7 +15,6 @@ gradeSelect.addEventListener('change', (e) => {
     topicSelect.disabled = false;
     const topics = mathData[selectedGrade].topics;
 
-    // Đổ danh sách các dạng toán vào dropdown
     topics.forEach((topic, index) => {
       const option = document.createElement('option');
       option.value = index;
@@ -27,7 +25,8 @@ gradeSelect.addEventListener('change', (e) => {
     topicSelect.disabled = true;
   }
 });
-// Lắng nghe sự kiện chọn Dạng Toán
+
+// 2. Lắng nghe khi chọn Dạng Toán
 topicSelect.addEventListener('change', (e) => {
   const selectedGrade = gradeSelect.value;
   const topicIndex = e.target.value;
@@ -43,7 +42,7 @@ topicSelect.addEventListener('change', (e) => {
     topicHeading.textContent = selectedTopic.name;
     exerciseList.appendChild(topicHeading);
 
-    // Duyệt qua từng câu hỏi trong topic
+    // Render từng bài tập
     selectedTopic.questions.forEach((q) => {
       const card = document.createElement('div');
       card.className = 'exercise-card';
@@ -56,7 +55,7 @@ topicSelect.addEventListener('change', (e) => {
         </div>
       `;
 
-      // Gắn sự kiện click Ẩn/Hiện đáp án cho nút bấm
+      // Bắt sự kiện click Ẩn/Hiện đáp án
       const toggleBtn = card.querySelector('.btn-toggle-answer');
       const answerBox = card.querySelector('.answer-box');
 
@@ -68,5 +67,4 @@ topicSelect.addEventListener('change', (e) => {
       exerciseList.appendChild(card);
     });
   }
-});
 });
